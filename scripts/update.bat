@@ -2,7 +2,14 @@
 timeout /t 1 /nobreak 
 echo Fetching from Git...
 "%CD%\scripts\git\bin\git.exe" init
-"%CD%\scripts\git\bin\git.exe" remote add origin https://github.com/Devil4ngle/squadmortar-release.git
-echo n | "%CD%\scripts\git\bin\git.exe" reset origin --hard
+rem Check if remote origin exists
+"%CD%\scripts\git\bin\git.exe" remote -v | find "origin" > nul
+if %errorlevel% neq 0 (
+    echo Adding remote origin...
+    "%CD%\scripts\git\bin\git.exe" remote add origin https://github.com/Devil4ngle/squadmortar-release.git
+) else (
+    echo Remote origin already exists.
+)
+"%CD%\scripts\git\bin\git.exe" fetch
 echo Script is up to date. Press any key to close.
 pause
