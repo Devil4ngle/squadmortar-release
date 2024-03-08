@@ -12,6 +12,9 @@ if %errorlevel% neq 0 (
 ) else (
     echo Remote origin already exists.
 )
-"%CD%\scripts\git\bin\git.exe" fetch
-echo Script is up to date. Press any key to close.
+"%CD%\scripts\git\bin\git.exe" fetch origin main
+echo no | "%CD%\scripts\git\bin\git.exe" reset --hard origin/main
+
+
+echo Script is up to date. Press any key to close. Start Script again
 pause
